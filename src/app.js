@@ -1,6 +1,7 @@
 import "regenerator-runtime/runtime";
 import Chart from "chart.js";
 
+// select elements from the DOM
 const countriesList = document.querySelector(".stats__choose-country");
 const confirmedCases = document.querySelector(
   ".stats__total-cases .stats__value"
@@ -24,36 +25,16 @@ const ctx = document.getElementById("chart__covid");
 const footer = document.querySelector(".footer");
 let covidDataChart;
 
-document.addEventListener("DOMContentLoaded", async function setupInitial() {
-  await createCountriesList().catch((err) => {
+// when page loads, create list of countries and get user's country
+document.addEventListener("DOMContentLoaded", function setupInitial() {
+  createCountriesList().catch((err) => {
     displayErrorMessage(err.message);
   });
-  getUserCountry().catch((err) => {
-    displayErrorMessage(err.message);
-  });
+  getUserCountry();
 });
 
+// get stats when user changes country
 countriesList.addEventListener("change", getStats);
-
-async function getUserCountry() {
-  let response = await fetch("https://ipapi.co/json/");
-  if (response.status == 200) {
-    let json = await response.json();
-    // select from the list country which data-code attribute matches country code from the response
-    Array.prototype.forEach.call(countriesList.options, (option) => {
-      if (option.dataset.code === json.country_code) {
-        option.setAttribute("selected", true);
-      }
-    });
-    // fire change event to get stats for user's country
-    let event = new Event("change");
-    countriesList.dispatchEvent(event);
-  } else {
-    throw new Error(
-      "Unable to set country automatically. Please select country manually from the list."
-    );
-  }
-}
 
 async function createCountriesList() {
   const res = await fetch("https://api.covid19api.com/countries");
@@ -77,6 +58,26 @@ async function createCountriesList() {
   });
 }
 
+async function getUserCountry() {
+  try {
+    let response = await fetch("https://ipapi.co/json/");
+    let json = await response.json();
+    // select from the list country which data-code attribute matches country code from the response
+    Array.prototype.forEach.call(countriesList.options, (option) => {
+      if (option.dataset.code === json.country_code) {
+        option.setAttribute("selected", true);
+      }
+    });
+    // fire change event to get stats for user's country
+    let event = new Event("change");
+    countriesList.dispatchEvent(event);
+  } catch (error) {
+    displayErrorMessage(
+      "Unable to get user country automatically. Choose country manually from the list."
+    );
+  }
+}
+
 function getStats() {
   hideErrorMessage();
   // get country url slug
@@ -92,7 +93,7 @@ function getStats() {
     .then((res) => {
       if (!res.ok) {
         throw new Error(
-          "A problem occurred while getting data from the server. Refresh the page and try again."
+          "A problem occurred while getting data from the server. Try again."
         );
       } else {
         return res.json();
