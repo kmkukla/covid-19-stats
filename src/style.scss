@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+// font-family: 'Inter', sans-serif;
+
+// color variables
+$dark: #2c2c2c;
+$lighter: #3c3c3c;
+$mint-cream: #f1f7ed;
+$green: #91c7b1;
+$red: #b33951;
+$yellow: #e3d081;
+
+// font variable
+$inter: "Inter",
+sans-serif;
+
+// basic reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $dark;
+  color: $mint-cream;
+  font-family: $inter;
+}
+
+.wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.header {
+  padding: 10px 15px;
+  background-color: $lighter;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo-img {
+  width: 40px;
+  animation: moveVirus 1.6s ease-in-out infinite;
+}
+
+@keyframes moveVirus {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+
+  20% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  80% {
+    transform: rotate(360deg) scale(1);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(0.8);
+  }
+}
+
+.stats__latest {
+  max-width: 1000px;
+  margin: 0 auto;
+
+}
+
+.stats__latest {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.stats__country,
+.stats__total-cases,
+.stats__recovered,
+.stats__deaths {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  flex-basis: 48%;
+  padding: 7px;
+  margin: 1%;
+
+  @media (min-width: 769px) {
+    flex-basis: 22.5%;
+    font-size: 1.1em;
+  }
+}
+
+.stats__country {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $lighter;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 10px;
+  overflow-wrap: anywhere;
+}
+
+.stats__choose-country {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-top: 10px;
+  padding: 5px;
+  width: 100%;
+  background-color: $mint-cream;
+  color: $dark;
+  font-family: $inter;
+  background-image: url("./images/arrow-bottom.svg");
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  background-size: 13px 13px;
+  padding-right: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.stats__total-cases {
+  background-color: $mint-cream;
+  color: $dark;
+}
+
+.stats__recovered {
+  background-color: $green;
+  color: $dark;
+}
+
+.stats__deaths {
+  background-color: $red;
+}
+
+.stats__total-cases,
+.stats__recovered,
+.stats__deaths {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.stats__value,
+.stats__new-value {
+  font-weight: bold;
+}
+
+.stats__value {
+  font-size: 1.2em;
+  line-height: 150%;
+}
+
+.stats__error-message {
+  display: none;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align: left;
+  padding-left: 25px;
+  background-image: url('./images/exclamation-round.svg');
+  background-repeat: no-repeat;
+  background-size: 18px;
+}
+
+.stats__error-message--display {
+  display: block;
+}
+
+.footer {
+  padding: 5px 0;
+  font-size: .9rem;
+}
+
+// hide scrollbar
+::-webkit-scrollbar {
+  display: none;
+}
+
+// hide scrollbar on mozilla
+.wrapper {
+  scrollbar-width: none;
+}

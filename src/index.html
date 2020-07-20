@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Stats</title>
+    <link rel="stylesheet" href="./style.scss">
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="header__logo">
+                <img src="./images/virus-logo.svg" class="header__logo-img" alt="virus logo">
+            </div>
+            <h2 class="header__title">COVID-19 Stats</h2>
+        </header>
+
+        <main class="stats">
+            <div class="stats__latest">
+                <div class="stats__country">
+                    <div class="stats__country-name">Choose country</div>
+                    <select class="stats__choose-country" name="country">
+                        <option value="" disabled selected>Choose country</option>
+                    </select>
+                </div>
+                <div class="stats__total-cases">
+                    <div class="stats__title">Total Cases</div>
+                    <div class="stats__value">0</div>
+                    <div class="stats__new-value">+0</div>
+                </div>
+                <div class="stats__recovered">
+                    <div class="stats__title">Recovered</div>
+                    <div class="stats__value">0</div>
+                    <div class="stats__new-value">+0</div>
+                </div>
+                <div class="stats__deaths">
+                    <div class="stats__title">Deaths</div>
+                    <div class="stats__value">0</div>
+                    <div class="stats__new-value">+0</div>
+                </div>
+                <div class="stats__error-message"></div>
+            </div>
+        </main>
+
+        <div class="chart">
+            <canvas id="chart__covid"></canvas>
+        </div>
+
+        <footer class="footer"></footer>
+
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
